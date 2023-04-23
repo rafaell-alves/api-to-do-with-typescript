@@ -48,8 +48,11 @@ class UserController {
         const match = await bcrypt.compare(req.body.password, result.password_hash);
         if(match) {
             var response = {
-                "sucesso": "Logado com Sucesso Bem-Vindo "+result.first_name+" "+result.last_name,
-                "token": Jwt.sign(
+                success: "Logado com Sucesso Bem-Vindo "+result.first_name+" "+result.last_name,
+                data:[
+                    result
+                ],
+               token: Jwt.sign(
                     {user:result.user_name},
                     'secret',
                     {expiresIn:'1h'}
